@@ -1,154 +1,34 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { Button, Form, Input } from 'antd'
 import './App.css'
+import UserForm from './modules/user/UserForm'
+import ProductoData from './modules/product/ProductoData'
+import OrderData from './modules/order/OrderData'
+import { Link, Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 
-import {
-  Button,
-  Cascader,
-  DatePicker,
-  Form,
-  Input,
-  InputNumber,
-  Mentions,
-  Segmented,
-  Select,
-  TreeSelect,
-} from 'antd';
-
-const { RangePicker } = DatePicker;
-
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 6 },
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 14 },
-  },
-};
-
-const App: React.FC = () =>  {
-  const [count, setCount] = useState(0)
-
-  const [form] = Form.useForm();
-  const variant = Form.useWatch('variant', form);
+function App() {
+  //1.- obtener valor de la variable
+  //2.- Modificar el valor
+  const [count, setCount] = useState(5)
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <Router>
+      <nav>
+        <ul>
+          <li><Link to="/users">Usuarios</Link></li>
+          <li><Link to="/products">Productos</Link></li>
+          <li><Link to="/orders">Ordenes</Link></li>
+        </ul>
+      </nav>
 
-      <Form
-      {...formItemLayout}
-      form={form}
-      variant={variant || 'filled'}
-      style={{ maxWidth: 600 }}
-      initialValues={{ variant: 'filled' }}
-    >
-      <Form.Item label="Form variant" name="variant">
-        <Segmented options={['outlined', 'filled', 'borderless', 'underlined']} />
-      </Form.Item>
-
-      <Form.Item label="Input" name="Input" rules={[{ required: true, message: 'Please input!' }]}>
-        <Input />
-      </Form.Item>
-
-      <Form.Item
-        label="InputNumber"
-        name="InputNumber"
-        rules={[{ required: true, message: 'Please input!' }]}
-      >
-        <InputNumber style={{ width: '100%' }} />
-      </Form.Item>
-
-      <Form.Item
-        label="TextArea"
-        name="TextArea"
-        rules={[{ required: true, message: 'Please input!' }]}
-      >
-        <Input.TextArea />
-      </Form.Item>
-
-      <Form.Item
-        label="Mentions"
-        name="Mentions"
-        rules={[{ required: true, message: 'Please input!' }]}
-      >
-        <Mentions />
-      </Form.Item>
-
-      <Form.Item
-        label="Select"
-        name="Select"
-        rules={[{ required: true, message: 'Please input!' }]}
-      >
-        <Select />
-      </Form.Item>
-
-      <Form.Item
-        label="Cascader"
-        name="Cascader"
-        rules={[{ required: true, message: 'Please input!' }]}
-      >
-        <Cascader />
-      </Form.Item>
-
-      <Form.Item
-        label="TreeSelect"
-        name="TreeSelect"
-        rules={[{ required: true, message: 'Please input!' }]}
-      >
-        <TreeSelect />
-      </Form.Item>
-
-      <Form.Item
-        label="DatePicker"
-        name="DatePicker"
-        rules={[{ required: true, message: 'Please input!' }]}
-      >
-        <DatePicker />
-      </Form.Item>
-
-      <Form.Item
-        label="RangePicker"
-        name="RangePicker"
-        rules={[{ required: true, message: 'Please input!' }]}
-      >
-        <RangePicker />
-      </Form.Item>
-
-      <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-      </Form.Item>
-    </Form>
-    </>
-
-    
+      <Routes>
+        <Route path="/users" element={<UserForm></UserForm>} />
+        <Route path="/products" element={<ProductoData></ProductoData>} />
+        <Route path="/orders" element={<OrderData/>} />
+      </Routes>
+    </Router>
   )
 }
-
 
 
 
